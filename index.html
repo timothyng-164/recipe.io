@@ -1,0 +1,261 @@
+<!doctype HTML>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Recipe.io</title>
+  <link rel="icon" href="images/favicon.ico">
+  <link rel="stylesheet" type="text/css" href="styles/main.css">
+  <link rel="stylesheet" type="text/css" href="styles/color.css">
+  <!-- bootstrap -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body>
+  <div class="content">
+  <!-- navbar -->
+  <nav class="navbar navbar-expand-sm navbar-light bg-light">
+    <a class="home-icon mr-2" href="#">
+      <img src="images/icon.png" width="40" height="40">
+    </a>
+    <a class="navbar-brand" href="#">Recipe.io</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item mx-1">
+          <a class="nav-link" href="#">Your Recipes</a>
+        </li>
+        <li class="nav-item mx-1">
+          <a class="nav-link" href="#">Shopping list</a>
+        </li>
+        <li class="nav-item mx-1">
+          <a class="nav-link" href="#">About</a>
+        </li>
+      </ul>
+      <!-- login modal -->
+      <button type="button" class="btn btn-outline-success my-2 my-sm-0 mr-1" data-toggle="modal" data-target="#login-modal">Login</button>
+      <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="login-modal" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="login-modal-title">Login</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form>
+                <div class="form-group">
+                  <label for="login-email">Email address</label>
+                  <input type="email" class="form-control" id="login-email" placeholder="Enter email">
+                </div>
+                <div class="form-group">
+                  <label for="login-password">Password</label>
+                  <input type="password" class="form-control" id="login-password" placeholder="Password">
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Login</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Sign up modal -->
+      <button type="button" class="btn btn-outline-success my-2 my-sm-0 mx-1" data-toggle="modal" data-target="#signup-modal">Sign up</button>
+      <div class="modal fade" id="signup-modal" tabindex="-1" role="dialog" aria-labelledby="signup-modal" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="login-modal-title">Signup</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form>
+                <div class="form-group">
+                  <label for="signup-email">Email address</label>
+                  <input type="email" class="form-control" id="signup-email" placeholder="Enter email">
+                </div>
+                <div class="form-group">
+                  <label for="signup-password">Password</label>
+                  <input type="password" class="form-control" id="signup-password" placeholder="Password">
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Sign up</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+<header>
+  <div class="jumbotron text-center">
+    <div class="container">
+      <h1 class="jumbotron-heading">Welcome to Recipe.io!</h1>
+      <p class="lead text-muted">Search from our available recipes or add your own recipes</p>
+      <div class="btn-group" role="group" aria-label="site-options">
+        <button type="button" id="recipe-search-btn" class="btn btn-primary">Search</button>
+        <button type="button" id="recipe-add-btn" class="btn btn-secondary">Add</button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <!-- search recipes -->
+  <div id="search-recipe-container" class="container-fluid">
+    <form id="search-recipe-form">
+      <div class="row form-group ">
+        <input type="search" class="form-control col-4 offset-4" id="recipe-search-input" placeholder="Search Recipes">
+        <button type="submit" class="btn btn-primary col-1">Search</button>
+      </div>
+    </form>
+    <hr>
+
+    <!-- placeholder recipe cards -->
+    <!-- TODO use js to search and dynamically display these -->
+    <div id="recipe-card-container" class="container-fluid p-0">
+      <div class="row justify-content-center">
+
+        <div class="card m-3" style="width: 22rem;">
+          <img src="images/recipe-samples/boba-tea.jpg" class="card-img-top" alt="starbucks with beans">
+          <div class="card-body">
+            <h5 class="card-title">Boba Tea</h5>
+            <p class="card-text">Refreshing on any day!</p>
+            <button class="btn btn-primary" data-toggle="modal" data-target="#example-recipe-modal">View</button>
+            <button class="btn btn-primary">Save</button>
+            <button class="btn btn-primary">Add to shopping list</button>
+          </div>
+        </div>
+
+        <div class="card m-3" style="width: 22rem;">
+          <img src="images/recipe-samples/sandwich.jpg" class="card-img-top" alt="starbucks with beans">
+          <div class="card-body">
+            <h5 class="card-title">Gourmet Sandwich</h5>
+            <p class="card-text">Yum</p>
+            <button class="btn btn-primary" data-toggle="modal" data-target="#example-recipe-modal">View</button>
+            <button class="btn btn-primary">Save</button>
+            <button class="btn btn-primary">Add to shopping list</button>
+          </div>
+        </div>
+
+        <div class="card m-3" style="width: 22rem;">
+          <img src="images/recipe-samples/steak-bananas-st-louis.jpg" class="card-img-top" alt="starbucks with beans">
+          <div class="card-body">
+            <h5 class="card-title">Steak and Bananas (St Louis style)</h5>
+            <p class="card-text">Only the best</p>
+            <button class="btn btn-primary" data-toggle="modal" data-target="#example-recipe-modal">View</button>
+            <button class="btn btn-primary">Save</button>
+            <button class="btn btn-primary">Add to shopping list</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- placeholder modal recipe -->
+    <!-- TODO use js to dynamically display this -->
+    <div class="modal fade" id="example-recipe-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Recipe Title</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <img src="images/recipe-samples/boba-tea.jpg" class="card-img-top" alt="starbucks with beans">
+            <hr>
+            <h4>Boba Tea</h4>
+            <p>Instructions</p>
+            <ol class="modal-instruction-list">
+              <li>step one<br></li>
+              <li>step two<br></li>
+              <li>step three<br></li>
+            </ol>
+            <p>Ingredients</p>
+            <ul class="modal-ingredient-list">
+              <li>6 ounces thing<br></li>
+              <li>3 ml thing<br></li>
+              <li>3 bananas<br></li>
+            </ul>
+
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-primary">Save</button>
+          <button class="btn btn-primary">Add to shopping list</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- add recipes -->
+  <div id="add-recipe-container" class="container-fluid">
+    <h3 class="text-center mb-3">Enter your recipe in the following format:</h3>
+    <hr>
+    <div class="row">
+
+    <div id="example-recipe" class="container col-5">
+      <div class="container rounded border">
+        <p>
+          Title: Cereal<br></br>
+          Instructions:<br>
+          1. Get bowl</br>
+          2. Combine ingredients into bowl<br></br>
+          Ingredients:<br>
+          - 2 cups milk<br>
+          - 30 g cereal<br><br>
+        </p>
+      </div>
+    </div>
+
+    <form id="add-recipe-form" class="col-6 mr-3">
+      <div class="form-group">
+        <textarea class="form-control" id="recipe-input" rows="9" placeholder="Your Recipe"></textarea>
+      </div>
+      <div class="row form-group my-3">
+        <button type="submit" class="btn btn-primary col-2 offset-4 mr-2">Add</button>
+        <button type="reset" class="btn btn-secondary col-2">Clear</button>
+      </div>
+    </form>
+
+    </div>
+  </div>
+
+</main>
+
+<nav id="bottom-nav" class="navbar border bg-light">
+  <div class="container-fluid">
+    <a href="https://www.github.com">Github</a>
+    <p class="float-right my-auto">
+      <a href="#">Back to top</a>
+    </p>
+  </div>
+</nav>
+
+</div>
+
+</body>
+
+<!-- jquery -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<!-- popper.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<!-- bootstrap -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script src="scripts/main.js"></script>
+
+</html>
