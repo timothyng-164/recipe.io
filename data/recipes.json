@@ -1,5 +1,6 @@
 [
     {
+        "id": 1,
         "name": "Crock Pot Roast",
         "ingredients": [
             {
@@ -30,9 +31,10 @@
             "Cook on low for 7-9 hours."
         ],
         "calories": "150",
-        "imageURL": "images/"
+        "imageURL": "images/recipe-images/pot-roast.jpg"
     },
     {
+        "id": 2,
         "name": "Roasted Asparagus",
         "ingredients": [
             {
@@ -51,7 +53,7 @@
         "steps": [
             "Preheat oven to 425°F.",
             "Cut off the woody bottom part of the asparagus spears and discard.",
-            "With a vegetable peeler, peel off the skin on the bottom 2-3 inches of the spears (this keeps the asparagus from being all.\",string.\", and if you eat asparagus you know what I mean by that).",
+            "With a vegetable peeler, peel off the skin on the bottom 2-3 inches of the spears (this keeps the asparagus from being all stringy, and if you eat asparagus you know what I mean by that).",
             "Place asparagus on foil-lined baking sheet and drizzle with olive oil.",
             "Sprinkle with salt.",
             "With your hands, roll the asparagus around until they are evenly coated with oil and salt.",
@@ -61,6 +63,6 @@
             "They are great plain, but sometimes I serve them with a light vinaigrette if we need something acidic to balance out our meal."
         ],
         "calories": "150",
-        "imageURL": "images/"
+        "imageURL": "images/recipe-images/asparagus.jpg"
     }
 ]

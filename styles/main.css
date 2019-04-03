@@ -8,3 +8,13 @@
 main {
   flex: 1;
 }
+
+#recipe-card-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.modal-lg {
+  max-width: 50rem !important;
+}
