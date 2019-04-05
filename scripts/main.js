@@ -1,16 +1,16 @@
+// Load the JSON recipes file
 $(document).ready(function () {
-
-  $.getJSON('data/recipes.json', function (recipes) {
-    for (i in recipes) {
-      show_recipe(recipes[i]);
+  $.getJSON('../data/recipes.json', function (recipes) {
+    for (var i in recipes) {
+      showRecipe(recipes[i]);
     }
   });
 });
 
-
-function show_recipe(recipe) {
-  var recipe_card =
-    '<div class="card m-3" data-toggle="modal" data-target="#recipe-modal-' + recipe.id +'" style="width: 22rem; height: 25rem;">' +
+// Grab the main card view of the recipe image and name, and insert it onto the screen
+function showRecipe (recipe) {
+  var recipeCard =
+    '<div class="card m-3" data-toggle="modal" data-target="#recipe-modal-' + recipe.id + '" style="width: 22rem; height: 25rem;">' +
       '<img src="' + recipe.imageURL + '" class="card-img-top" style="max-width: 22rem; max-height: 22rem;>' +
       '<div class="card-body">' +
         '<div class="row justify-content-center my-3">' +
@@ -19,10 +19,11 @@ function show_recipe(recipe) {
       '</div>' +
     '</div>';
 
-  $('#recipe-card-container').append(recipe_card);
+  $('#recipe-card-container').append(recipeCard);
 
-  var recipe_modal =
-    '<div class="modal fade" id="recipe-modal-' + recipe.id +'" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">' +
+  // This will be all the info pertaining to each recipe.  It is hidden until a recipe is clicked on.  see html class "data-toggle" "data-target" for how to handle on click
+  var recipeModal =
+    '<div class="modal fade" id="recipe-modal-' + recipe.id + '" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">' +
     '<div class="modal-dialog modal-lg" role="document">' +
       '<div class="modal-content">' +
         '<div class="modal-body">' +
@@ -44,15 +45,37 @@ function show_recipe(recipe) {
       '</div>' +
     '</div>';
 
-  $('#search-recipe-container').append(recipe_modal);
+  $('#search-recipe-container').append(recipeModal);
 
   var ingredients = recipe.ingredients;
-  for (i in ingredients) {
+  for (var i in ingredients) {
     $('#modal-ingredients-' + recipe.id).append('<li>' + ingredients[i].quantity + ' ' + ingredients[i].name + '<br></li>');
   }
   var steps = recipe.steps;
   for (i in steps) {
     $('#modal-steps-' + recipe.id).append('<li>' + steps[i] + '<br></li>');
   }
-
 }
+
+// Search button click funcitonality
+$('#search-button').click(function () {
+  $('.card').each(function () {
+    if (!$(this).text().toUpperCase().includes($('#recipe-search-input').val().toUpperCase())) {
+      $(this).css('visibility', 'hidden');
+    } else {
+      $(this).css('visibility', 'visible');
+    }
+  });
+});
+
+// Live filtering of grid on seach bar inputs
+// $('#recipe-search-input').on('input', function () {
+//   // for each recipe card, if the string in the search bar is a substring of the name, keep visible, otherwise make it invisible
+//   $('.card').each(function () {
+//     if (!$(this).text().toUpperCase().includes($('#recipe-search-input').val().toUpperCase())) {
+//       $(this).css('visibility', 'hidden');
+//     } else {
+//       $(this).css('visibility', 'visible');
+//     }
+//   });
+// });

@@ -31,7 +31,7 @@
             "Cook on low for 7-9 hours."
         ],
         "calories": "150",
-        "imageURL": "images/recipe-images/pot-roast.jpg"
+        "imageURL": "../images/recipe-images/pot-roast.jpg"
     },
     {
         "id": 2,
@@ -63,6 +63,6 @@
             "They are great plain, but sometimes I serve them with a light vinaigrette if we need something acidic to balance out our meal."
         ],
         "calories": "150",
-        "imageURL": "images/recipe-images/asparagus.jpg"
+        "imageURL": "../images/recipe-images/asparagus.jpg"
     }
 ]
