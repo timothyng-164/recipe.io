@@ -58,7 +58,8 @@ function showRecipe (recipe) {
 }
 
 // Search button click funcitonality
-$('#search-button').click(function () {
+$('#search-button').click(function (event) {
+  event.preventDefault();
   $('.card').each(function () {
     if (!$(this).text().toUpperCase().includes($('#recipe-search-input').val().toUpperCase())) {
       $(this).css('visibility', 'hidden');
