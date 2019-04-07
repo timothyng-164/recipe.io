@@ -8,7 +8,7 @@ function load_tables() {
   $('tbody *').remove();  // clear all table rows
   var local_recipe_list = JSON.parse(localStorage.getItem('my_recipe_list'));
 
-  $.getJSON('data/recipes.json', function (all_recipes) {
+  $.getJSON('../data/recipes.json', function (all_recipes) {
     for (var id in local_recipe_list) {
       var recipe = all_recipes.find(recipe => recipe.id == id);
       // show recipe in table

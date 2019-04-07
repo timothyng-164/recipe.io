@@ -1,6 +1,6 @@
 // Load the JSON recipes file
 $(document).ready(function () {
-  $.getJSON('data/recipes.json', function (recipes) {
+  $.getJSON('../data/recipes.json', function (recipes) {
     for (var i in recipes) {
       showRecipe(recipes[i]);
     }
