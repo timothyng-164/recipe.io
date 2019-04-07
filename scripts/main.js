@@ -1,10 +1,11 @@
 // Load the JSON recipes file
 $(document).ready(function () {
-  $.getJSON('../data/recipes.json', function (recipes) {
+  $.getJSON('data/recipes.json', function (recipes) {
     for (var i in recipes) {
       showRecipe(recipes[i]);
     }
   });
+
 });
 
 // Grab the main card view of the recipe image and name, and insert it onto the screen
@@ -38,7 +39,8 @@ function showRecipe (recipe) {
           '<ol id="modal-steps-' + recipe.id + '"></ol>' +
         '</div>' +
         '<div class="modal-footer">' +
-          '<button class="btn btn-primary">Save</button>' +
+          '<p style="display: none;">Recipe Added!</p>' +
+          '<button class="btn btn-primary save-recipe-button">Save</button>' +
           '<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>' +
         '</div>' +
         '</div>' +
@@ -80,3 +82,29 @@ $('#search-button').click(function (event) {
 //     }
 //   });
 // });
+
+
+// save recipe when clicking recipe modal's save button
+$(document).on('click', '.save-recipe-button', function(event) {
+  var recipe_id = $(this).closest('.modal').attr('id').split('-')[2];
+  save_recipe(recipe_id);
+  // flash message next to save button
+  $(this).prev().fadeIn();
+  $(this).prev().fadeOut();
+});
+
+// save recipe to local storage
+function save_recipe(recipe_id) {
+  if(localStorage.getItem('my_recipe_list')) {
+    var recipe_list = JSON.parse(localStorage.getItem('my_recipe_list'));
+  } else {
+    var recipe_list = {};
+  }
+  if (!recipe_list[recipe_id]) {
+    recipe_list[recipe_id] = 1;
+  } else {
+    recipe_list[recipe_id]++;
+  }
+  console.log(recipe_list)
+  localStorage.setItem('my_recipe_list', JSON.stringify(recipe_list));
+}

@@ -1,0 +1,104 @@
+<!doctype HTML>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Recipe.io</title>
+  <link rel="icon" href="images/favicon.ico">
+  <link rel="stylesheet" type="text/css" href="styles/shopping-list.css">
+  <link rel="stylesheet" type="text/css" href="styles/layout.css">
+  <!-- bootstrap -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body>
+  <div class="content">
+  <!-- navbar -->
+  <nav class="navbar navbar-expand-sm navbar-light bg-light">
+    <a class="home-icon mr-2" href="index.html">
+      <img src="images/icon.png" width="40" height="40">
+    </a>
+    <a class="navbar-brand" href="index.html">Recipe.io</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item mx-1">
+          <a class="nav-link" href="#">Shopping list</a>
+        </li>
+        <li class="nav-item mx-1">
+          <a class="nav-link" href="#">About</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+<header>
+  <div class="jumbotron text-center">
+    <div class="container">
+      <h1 class="jumbotron-heading">Shopping List</h1>
+
+    </div>
+  </div>
+</header>
+
+<main>
+  <!-- search recipes -->
+  <div class="container">
+    <div id="table-container" class="table-responsive-xl">
+
+      <!-- recipe list -->
+      <h2 class="text-center my-3">Recipes</h2>
+      <table id="recipe-list-table" class="table table-sm table-bordered table-hover">
+        <thead>
+          <th scope="col">Recipe</th>
+          <th scope="col">Quantity</th>
+          <th scope="col"></th>
+        </thead>
+        <tbody>
+          <!-- recipes and quantities are added from shopping-list.js -->
+        </tbody>
+      </table>
+
+      <!-- ingredient list -->
+      <h2 class="text-center my-4">Ingredients</h2>
+      <table id="ingredient-list-table" class="table table-sm table-bordered table-hover">
+        <thead>
+          <th scope="col"></th>
+          <th scope="col">Quantity</th>
+          <th scope="col">Ingredient</th>
+        </thead>
+        <tbody>
+          <!-- quantities and ingredients are added from shopping-list.js -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</main>
+
+<nav id="bottom-nav" class="navbar border bg-light">
+  <div class="container-fluid">
+    <a class="home-icon mr-2" href="https://github.com/timothyng-164/recipe.io">
+      <img src="images/github-icon.png" width="25" height="25">
+    </a>
+    <p class="float-right my-auto">
+      <a href="#">Back to top</a>
+    </p>
+  </div>
+</nav>
+
+</div>
+
+</body>
+
+<!-- jquery -->
+<script src="scripts/jquery-3.3.1.min.js"></script>
+<!-- popper.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<!-- bootstrap -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script src="scripts/shopping-list.js"></script>
+
+</html>

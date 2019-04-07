@@ -1,13 +1,4 @@
-/* place footer on bottom */
-.content {
-  display: flex;
-  min-height: 100vh;
-  flex-direction: column;
-}
-
-main {
-  flex: 1;
-}
+/* index.html */
 
 #recipe-card-container {
   display: flex;

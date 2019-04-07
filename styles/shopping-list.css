@@ -1,0 +1,7 @@
+/* shopping-list.html */
+
+#shopping-list-container {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+}
