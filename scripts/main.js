@@ -62,39 +62,40 @@ function showRecipe (recipe) {
 // Search button click funcitonality
 $('#search-button').click(function (event) {
   event.preventDefault();
-  $('.card').each(function () {
-    if (!$(this).text().toUpperCase().includes($('#recipe-search-input').val().toUpperCase())) {
-      $(this).css('visibility', 'hidden');
-    } else {
-      $(this).css('visibility', 'visible');
-    }
-  });
+  searchRecipe();
 });
 
 // Live filtering of grid on seach bar inputs
 // $('#recipe-search-input').on('input', function () {
-//   // for each recipe card, if the string in the search bar is a substring of the name, keep visible, otherwise make it invisible
-//   $('.card').each(function () {
-//     if (!$(this).text().toUpperCase().includes($('#recipe-search-input').val().toUpperCase())) {
-//       $(this).css('visibility', 'hidden');
-//     } else {
-//       $(this).css('visibility', 'visible');
-//     }
-//   });
+//   searchRecipe();
 // });
 
+// display all recipes that match input
+function searchRecipe() {
+  $('#recipe-card-container').empty();     // clear recipes on page
+  var input = $('#recipe-search-input').val().toLowerCase();
+  $.getJSON('../data/recipes.json', function (allRecipes) {
+    // search and show recipes that match the user's input
+    for (var i = 0; i < allRecipes.length; i++) {
+      var name = allRecipes[i].name.toLowerCase();
+      if (name.includes(input)) {
+        showRecipe(allRecipes[i]);
+      }
+    }
+  });
+}
 
 // save recipe when clicking recipe modal's save button
 $(document).on('click', '.save-recipe-button', function(event) {
   var recipe_id = $(this).closest('.modal').attr('id').split('-')[2];
-  save_recipe(recipe_id);
+  saveRecipe(recipe_id);
   // flash message next to save button
   $(this).prev().fadeIn();
   $(this).prev().fadeOut();
 });
 
 // save recipe to local storage
-function save_recipe(recipe_id) {
+function saveRecipe(recipe_id) {
   if(localStorage.getItem('my_recipe_list')) {
     var recipe_list = JSON.parse(localStorage.getItem('my_recipe_list'));
   } else {
