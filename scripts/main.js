@@ -37,6 +37,9 @@ function showRecipe (recipe) {
           '<ul id="modal-ingredients-' + recipe.id + '"></ul>' +
           '<p>Steps</p>' +
           '<ol id="modal-steps-' + recipe.id + '"></ol>' +
+          '<p>Calories </p>' +
+          '<ul id="modal-calories-' + recipe.id + '"></ul>' +
+          '<p>Quantity: </p>' + '<input type="text" name="firstname" maxlength="5" size="5"></input>' +
         '</div>' +
         '<div class="modal-footer">' +
           '<p style="display: none;">Recipe Added!</p>' +
@@ -57,6 +60,9 @@ function showRecipe (recipe) {
   for (i in steps) {
     $('#modal-steps-' + recipe.id).append('<li>' + steps[i] + '<br></li>');
   }
+  var calories = recipe.calories;
+    $('#modal-calories-' + recipe.id).append('<li>' + calories + '<br></li>');
+
 }
 
 // Search button click funcitonality
