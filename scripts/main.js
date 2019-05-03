@@ -3,7 +3,7 @@ const API_KEY = '627df20ed4f67c17b87c832eba1c3f37';
 
 // Load the JSON recipes file
 $(document).ready(function () {
-  searchRecipe('');
+  searchRecipe('', '1');
 });
 
 // Search button click funcitonality
@@ -11,33 +11,39 @@ $('#search-button').click(function (event) {
   event.preventDefault();
   var input = $('#recipe-search-input').val();
   input = input.toLowerCase().replace(' ', '+');
-  searchRecipe(input);
+  searchRecipe(input, $('input[name=optradio]:checked', '#searchOptions').val());
 });
 
-
-function searchRecipe(query) {
+function searchRecipe (query, searchParam) {
   var baseRequest = 'http://api.yummly.com/v1/api/recipes?_app_id=' + API_ID + '&_app_key=' + API_KEY + '&requirePictures=true&q=';
-  query = query.replace(' ', '+');
-  var requestURL = baseRequest + query ;
+  var requestURL;
 
-  $('#recipe-card-container').empty();     // clear recipes on page
+  // Search by recipe name
+  if (searchParam === '1') {
+    query = query.replace(' ', '+');
+    requestURL = baseRequest + query;
+  } else { // Search by ingredients
+    query = query.replace('+', '&allowedIngredient[]=');
+    query = '&allowedIngredient[]=' + query;
+    requestURL = baseRequest + query;
+  }
+
+  $('#recipe-card-container').empty(); // clear recipes on page
   // show all recipes that match query
   $.getJSON(requestURL, function (search) {
     $('#search-attribution').empty();
     $('#search-attribution').append(search.attribution.html);
-    recipes = search.matches;
-    // for (var i = 0; i < recipes.length; i++) {
-    for (var i = 0; i < 4; i++) {
+    var recipes = search.matches;
+    for (var i = 0; i < recipes.length; i++) {
       showRecipeCard(recipes[i]);
     }
   });
 }
 
-
 // Show main recipe card with image and name
-function showRecipeCard(recipe) {
+function showRecipeCard (recipe) {
   var recipeCard =
-  `<div class="card m-3 overflow-hidden" data-toggle="modal" recipe-id=${recipe.id} data-target="#recipe-modal-${ recipe.id }" style="width: 21rem; height: 21rem;">
+  `<div class="card m-3 overflow-hidden" data-toggle="modal" recipe-id=${recipe.id} data-target="#recipe-modal-${recipe.id}" style="width: 21rem; height: 21rem;">
       <img src="" class="card-img-top" id="img-${recipe.id}">
       <div class="card-body py-1">
         <div id="card-tags-${recipe.id}" class="row my-2 justify-content-center d-flex flex-nowrap overflow-hidden"></div>
@@ -51,18 +57,17 @@ function showRecipeCard(recipe) {
 
   // fetch recipe page and display modal
   var requestURL = 'http://api.yummly.com/v1/api/recipe/' + recipe.id + '?_app_id=' + API_ID + '&_app_key=' + API_KEY + '&maxResult=20';
-  $.getJSON(requestURL, function(recipePage) {
-    console.log(recipePage);
+  $.getJSON(requestURL, function (recipePage) {
+    // console.log(recipePage);
     showRecipeModal(recipePage);
   });
 }
 
-
 // Add pop-up page for recipe card
-function showRecipeModal(recipe) {
+function showRecipeModal (recipe) {
   // get largest image url
   var keys = Object.keys(recipe.images[0]);
-  var image = recipe.images[0][keys[keys.length-2]];
+  var image = recipe.images[0][keys[keys.length - 2]];
   // This will be all the info pertaining to each recipe.  It is hidden until a recipe is clicked on.  see html class "data-toggle" "data-target" for how to handle on click
   var recipeModal =
     `<div class="modal fade" id="recipe-modal-${recipe.id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -88,7 +93,7 @@ function showRecipeModal(recipe) {
         </div>
       </div>
         <div class="modal-footer">
-          <p class="my-auto" style="display: none;">Recipe Added!</p>
+          <p class="my-auto mx-3" style="display: none;">Recipe Added!</p>
           <button class="btn btn-primary save-recipe-button" recipe-id="${recipe.id}">Save</button>
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         </div>
@@ -104,7 +109,7 @@ function showRecipeModal(recipe) {
   $('#img-' + recipe.id).attr('src', image);
 
   // add tags to recipe card and modal
-  var tags = recipe.attributes
+  var tags = recipe.attributes;
   for (var key in tags) {
     $('#card-tags-' + recipe.id).append('<span class="badge badge-pill badge-primary mx-1">' + tags[key][0] + '</span>');
     tags[key].forEach(function (tag) {
@@ -120,13 +125,12 @@ function showRecipeModal(recipe) {
     }
   });
   if (calories) {
-    $('#calories-' + recipe.id).text("Calories: " + calories);
+    $('#calories-' + recipe.id).text('Calories: ' + calories);
   }
 }
 
-
 // save recipe when clicking recipe modal's save button
-$(document).on('click', '.save-recipe-button', function(event) {
+$(document).on('click', '.save-recipe-button', function (event) {
   var recipeID = $(this).attr('recipe-id');
   saveRecipe(recipeID);
   // flash message next to save button
@@ -134,15 +138,15 @@ $(document).on('click', '.save-recipe-button', function(event) {
   $(this).prev().fadeOut();
 });
 
-
 // save recipe to local storage
 // recipes are saved as a js object {recipeID: numServings, ....}
-function saveRecipe(recipeID) {
+function saveRecipe (recipeID) {
   // initialize client-side list
-  if(localStorage.getItem('localRecipeList')) {
-    var recipeList = JSON.parse(localStorage.getItem('localRecipeList'));
+  var recipeList;
+  if (localStorage.getItem('localRecipeList')) {
+    recipeList = JSON.parse(localStorage.getItem('localRecipeList'));
   } else {
-    var recipeList = {};
+    recipeList = {};
   }
   // add recipe to list with number of servings
   var servings = Number($('#servings-form-' + recipeID).val());
