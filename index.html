@@ -48,12 +48,34 @@
         <div class="row justify-content-center">
           <form id="search-recipe-form">
             <div class="row">
-              <select id="cuisine-select" class="custom-select col-3">
-                <option selected>cuisine</option>
-                <option>asian</option>
+              <select id="cuisine-select" class="custom-select col-4">
+                <option value="NONE" selected>Cuisine...</option>
+                <option value="cuisine^cuisine-american">American</option>
+                <option value="cuisine^cuisine-italian">Italian</option>
+                <option value="cuisine^cuisine-asian">Asian</option>
+                <option value="cuisine^cuisine-mexican">Mexican</option>
+                <option value="cuisine^cuisine-french">French</option>
+                <option value="cuisine^cuisine-southwestern">Southwestern</option>
+                <option value="cuisine^cuisine-barbecue">Barbecue</option>
+                <option value="cuisine^cuisine-indian">Indian</option>
+                <option value="cuisine^cuisine-chinese">Chinese</option>
+                <option value="cuisine^cuisine-english">English</option>
+                <option value="cuisine^cuisine-mediterranean">Mediterranean</option>
+                <option value="cuisine^cuisine-greek">Greek</option>
+                <option value="cuisine^cuisine-spanish">Spanish</option>
+                <option value="cuisine^cuisine-german">German</option>
+                <option value="cuisine^cuisine-thai">Thai</option>
+                <option value="cuisine^cuisine-moroccan">Moroccan</option>
+                <option value="cuisine^cuisine-irish">Irish</option>
+                <option value="cuisine^cuisine-japanese">Japanese</option>
+                <option value="cuisine^cuisine-cuban">Cuban</option>
+                <option value="cuisine^cuisine-hawaiin">Hawaiin</option>
+                <option value="cuisine^cuisine-swedish">Swedish</option>
+                <option value="cuisine^cuisine-hungarian">Hungarian</option>
+                <option value="cuisine^cuisine-portugese">Portugese</option>
               </select>
               <input type="search" class="form-control col-6" id="recipe-search-input" placeholder="Search Recipes">
-              <button type="submit" class="btn btn-primary col-3" id="search-button">Search</button>
+              <button type="submit" class="btn btn-primary col-2" id="search-button">Search</button>
             </div>
           </form>
         </div>
