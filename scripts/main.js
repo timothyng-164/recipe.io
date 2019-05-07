@@ -34,6 +34,9 @@ function searchRecipe (query, searchParam) {
     $('#search-attribution').empty();
     $('#search-attribution').append(search.attribution.html);
     var recipes = search.matches;
+    if (recipes.length == 0) {
+      $('#jumbotron').append(`<h5>Search results empty</h5>`);
+    }
     for (var i = 0; i < recipes.length; i++) {
       showRecipeCard(recipes[i]);
     }

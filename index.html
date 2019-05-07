@@ -35,7 +35,7 @@
   </nav>
 
 <header>
-  <div class="jumbotron text-center">
+  <div id="jumbotron" class="jumbotron text-center">
     <div class="container">
       <h1 class="jumbotron-heading">Welcome to Recipe.io!</h1>
 
@@ -48,7 +48,11 @@
         <div class="row justify-content-center">
           <form id="search-recipe-form">
             <div class="row">
-              <input type="search" class="form-control col-9" id="recipe-search-input" placeholder="Search Recipes">
+              <select id="cuisine-select" class="custom-select col-3">
+                <option selected>cuisine</option>
+                <option>asian</option>
+              </select>
+              <input type="search" class="form-control col-6" id="recipe-search-input" placeholder="Search Recipes">
               <button type="submit" class="btn btn-primary col-3" id="search-button">Search</button>
             </div>
           </form>
