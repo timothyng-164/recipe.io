@@ -1,47 +1,113 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>Recipe.io</title>
-        <link rel="icon" href="images/favicon.ico">
-        <link rel="stylesheet" type="text/css" href="styles/shopping-list.css">
-        <link rel="stylesheet" type="text/css" href="styles/layout.css">
-        <!-- bootstrap -->
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-      </head>
-    <body>
-        <div class="content">
-            <!-- navbar -->
-            <nav class="navbar navbar-expand-sm navbar-light bg-light">
-              <a class="home-icon mr-2" href="index.html">
-                <img src="images/icon.png" width="40" height="40">
-              </a>
-              <a class="navbar-brand" href="index.html">Recipe.io</a>
-              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-              </button>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Recipe.io</title>
+  <link rel="icon" href="images/favicon.ico">
+  <link rel="stylesheet" type="text/css" href="styles/shopping-list.css">
+  <link rel="stylesheet" type="text/css" href="styles/layout.css">
+  <!-- bootstrap -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body>
+  <div class="content">
+    <!-- navbar -->
+    <nav class="navbar navbar-expand-sm navbar-light bg-light">
+      <a class="home-icon mr-2" href="index.html">
+        <img src="images/icon.png" width="40" height="40">
+      </a>
+      <a class="navbar-brand" href="index.html">Recipe.io</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item mx-1">
+            <a class="nav-link" href="#">Shopping list</a>
+          </li>
+          <li class="nav-item mx-1">
+            <a class="nav-link" href="meal-plan.html">Meal plan</a>
+          </li>
+          <li class="nav-item mx-1">
+            <a class="nav-link" href="about.html">About</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <header>
+      <div class="jumbotron text-center">
+        <div class="container">
+          <h1 class="jumbotron-heading">Create a meal plan!</h1>
+        </div>
+      </div>
+    </header>
+    <div class="container-fluid my-3">
+      <div class="row justify-content-center">
+        <form id="meal-plan-form" class="border rounded p-3">
+          <div class="form-group">
+            <label for="plan-ingredients">Ingredients</label>
+            <textarea class="form-control" id="plan-ingredients" placeholder="Ingredients" rows="5"></textarea>
+            <small class="form-text text-muted">Enter a list of ingredients you want seperated by a newline.</small>
+          </div>
+
+          <div class="form-group">
+            <label for="excluded-ingredients">Excluded Ingredients</label>
+            <textarea class="form-control" id="excluded-ingredients" placeholder="Excluded Ingredients"
+              rows="5"></textarea>
+            <small class="form-text text-muted">Enter a list of ingredients you don't want seperated by a newline.</small>
+          </div>
+
+          <div class="form-group">
+            <label for="cuisine-select">Cuisine</label>
+            <select id="cuisine-select" class="custom-select" multiple>
+              <option value="NONE" selected>Select...</option>
+              <option value="cuisine^cuisine-american">American</option>
+              <option value="cuisine^cuisine-italian">Italian</option>
+              <option value="cuisine^cuisine-asian">Asian</option>
+              <option value="cuisine^cuisine-mexican">Mexican</option>
+              <option value="cuisine^cuisine-french">French</option>
+              <option value="cuisine^cuisine-southwestern">Southwestern</option>
+              <option value="cuisine^cuisine-barbecue">Barbecue</option>
+              <option value="cuisine^cuisine-indian">Indian</option>
+              <option value="cuisine^cuisine-chinese">Chinese</option>
+              <option value="cuisine^cuisine-english">English</option>
+              <option value="cuisine^cuisine-mediterranean">Mediterranean</option>
+              <option value="cuisine^cuisine-greek">Greek</option>
+              <option value="cuisine^cuisine-spanish">Spanish</option>
+              <option value="cuisine^cuisine-german">German</option>
+              <option value="cuisine^cuisine-thai">Thai</option>
+              <option value="cuisine^cuisine-moroccan">Moroccan</option>
+              <option value="cuisine^cuisine-irish">Irish</option>
+              <option value="cuisine^cuisine-japanese">Japanese</option>
+              <option value="cuisine^cuisine-cuban">Cuban</option>
+              <option value="cuisine^cuisine-hawaiin">Hawaiin</option>
+              <option value="cuisine^cuisine-swedish">Swedish</option>
+              <option value="cuisine^cuisine-hungarian">Hungarian</option>
+              <option value="cuisine^cuisine-portugese">Portugese</option>
+            </select>
+            <small class="form-text text-muted">You can select multiple cuisines.</small>
+          </div>
           
-              <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">
-                  <li class="nav-item mx-1">
-                    <a class="nav-link" href="#">Shopping list</a>
-                  </li>
-                  <li class="nav-item mx-1">
-                    <a class="nav-link" href="meal-plan.html">Meal plan</a>
-                  </li>
-                  <li class="nav-item mx-1">
-                    <a class="nav-link" href="about.html">About</a>
-                  </li>
-                </ul>
-              </div>
-            </nav>
-          
-          <header>
-            <div class="jumbotron text-center">
-                <div class="container">
-                    <h1 class="jumbotron-heading">Create a meal plan!</h1>
-                </div>
-            </div>
-          </header>
-    </body>
+          <div class="form-group">
+            <label for="calories">Calories</label>
+            <input type="number" class="form-control" placeholder="Enter calories">
+          </div>
+
+          <div class="container-fluid my-4 text-center">
+            <button id="submit-plan" type="submit" class="btn btn-primary">Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+  <script src="scripts/jquery-3.3.1.min.js"></script>
+  <script src="scripts/meal-plan.js"></script>
+</body>
+
 </html>
