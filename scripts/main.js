@@ -33,6 +33,7 @@ function searchRecipe (query, searchParam) {
   }
 
   $('#recipe-card-container').empty(); // clear recipes on page
+
   // show all recipes that match query
   $.getJSON(requestURL, function (search) {
     $('#search-attribution').empty();
@@ -80,6 +81,7 @@ function showRecipeModal (recipe) {
   // get largest image url
   var keys = Object.keys(recipe.images[0]);
   var image = recipe.images[0][keys[keys.length - 2]];
+
   // This will be all the info pertaining to each recipe.  It is hidden until a recipe is clicked on.  see html class "data-toggle" "data-target" for how to handle on click
   var recipeModal =
     `<div class="modal fade" id="recipe-modal-${recipe.id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -117,6 +119,7 @@ function showRecipeModal (recipe) {
   recipe.ingredientLines.forEach(function (ingredient) {
     $('#modal-ingredients-' + recipe.id).append('<li>' + ingredient + '<br></li>');
   });
+
   // set large image for recipe card
   $('#img-' + recipe.id).attr('src', image);
 
@@ -160,6 +163,7 @@ function saveRecipe (recipeID) {
   } else {
     recipeList = {};
   }
+
   // add recipe to list with number of servings
   var servings = Number($('#servings-form-' + recipeID).val());
   if (!recipeList[recipeID]) {
