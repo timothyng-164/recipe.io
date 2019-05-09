@@ -28,6 +28,9 @@
           <a class="nav-link" href="shopping-list.html">Shopping list</a>
         </li>
         <li class="nav-item mx-1">
+          <a class="nav-link" href="meal-plan.html">Meal plan</a>
+        </li>
+        <li class="nav-item mx-1">
           <a class="nav-link" href="about.html">About</a>
         </li>
       </ul>
@@ -35,18 +38,52 @@
   </nav>
 
 <header>
-  <div class="jumbotron text-center">
+  <div id="jumbotron" class="jumbotron text-center">
     <div class="container">
       <h1 class="jumbotron-heading">Welcome to Recipe.io!</h1>
+
+      <form id="searchOptions">
+        <label class="radio-inline mx-2"><input type="radio" name="optradio" value="1" checked> Name </label>
+        <label class="radio-inline"><input type="radio" name="optradio" value="2"> Ingredients </label>
+      </form>
 
       <div class="container-fluid my-3">
         <div class="row justify-content-center">
           <form id="search-recipe-form">
             <div class="row">
-              <input type="search" class="form-control col-9" id="recipe-search-input" placeholder="Search Recipes">
-              <button type="submit" class="btn btn-primary col-3" id="search-button">Search</button>
+              <select id="cuisine-select" class="custom-select col-4">
+                <option value="NONE" selected>Cuisine...</option>
+                <option value="cuisine^cuisine-american">American</option>
+                <option value="cuisine^cuisine-italian">Italian</option>
+                <option value="cuisine^cuisine-asian">Asian</option>
+                <option value="cuisine^cuisine-mexican">Mexican</option>
+                <option value="cuisine^cuisine-french">French</option>
+                <option value="cuisine^cuisine-southwestern">Southwestern</option>
+                <option value="cuisine^cuisine-barbecue">Barbecue</option>
+                <option value="cuisine^cuisine-indian">Indian</option>
+                <option value="cuisine^cuisine-chinese">Chinese</option>
+                <option value="cuisine^cuisine-english">English</option>
+                <option value="cuisine^cuisine-mediterranean">Mediterranean</option>
+                <option value="cuisine^cuisine-greek">Greek</option>
+                <option value="cuisine^cuisine-spanish">Spanish</option>
+                <option value="cuisine^cuisine-german">German</option>
+                <option value="cuisine^cuisine-thai">Thai</option>
+                <option value="cuisine^cuisine-moroccan">Moroccan</option>
+                <option value="cuisine^cuisine-irish">Irish</option>
+                <option value="cuisine^cuisine-japanese">Japanese</option>
+                <option value="cuisine^cuisine-cuban">Cuban</option>
+                <option value="cuisine^cuisine-hawaiin">Hawaiin</option>
+                <option value="cuisine^cuisine-swedish">Swedish</option>
+                <option value="cuisine^cuisine-hungarian">Hungarian</option>
+                <option value="cuisine^cuisine-portugese">Portugese</option>
+              </select>
+              <input type="search" class="form-control col-6" id="recipe-search-input" placeholder="Search Recipes">
+              <button type="submit" class="btn btn-primary col-2" id="search-button">Search</button>
             </div>
           </form>
+        </div>
+        <div id="search-attribution" class="row justify-content-center my-1">
+          <!-- api attribution -->
         </div>
       </div>
 

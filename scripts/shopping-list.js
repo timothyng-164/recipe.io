@@ -1,44 +1,60 @@
+const API_ID = '26a5fadf';
+const API_KEY = '627df20ed4f67c17b87c832eba1c3f37';
+
 $(document).ready(function () {
   loadTables();
 });
 
+
 // populate recipe and ingredient tables
 function loadTables () {
-  $('tbody *').remove();// clear all table rows
-  var localRecipeList = JSON.parse(localStorage.getItem('my_recipe_list'));
+  // check if localStorage is intialized or empty
+  if (localStorage.length == 0 || localStorage.localRecipeList== '{}') {
+    $('#table-container').hide();
+    $('#empty-cart-message').show();
+    return;
+  } else {
+    $('#table-container').show();
+    $('#empty-cart-message').hide();
+  }
 
-  $.getJSON('../data/recipes.json', function (allRecipes) {
-    for (var id in localRecipeList) {
-      var recipe = allRecipes.find(recipe => recipe.id === parseInt(id));
-      // show recipe in table
-      $('#recipe-list-table tbody').append(
-        '<tr>' +
-          '<td>' + recipe.name + '</td>' +
-          '<td>' + localRecipeList[id] + '</td>' +
-          '<td><button class="remove-recipe" recipe_id="' + id + '">x</button></td>' +
-        '</tr>'
+  $('tbody *').remove();  // clear all table rows
+  var recipeList = JSON.parse(localStorage.getItem('localRecipeList'));
+
+  // add recipe servings to table
+  for (var id in recipeList) {
+    $('#recipe-list-table tbody').append(
+      `<tr id="recipe-row-${id}">
+        <td>${recipeList[id]}</td>
+        <td><button class="remove-recipe" recipe-id="${id}">x</button></td>
+      <tr>`
+    );
+  }
+  for (var id in recipeList) {
+    var requestURL = 'http://api.yummly.com/v1/api/recipe/' + id + '?_app_id=' + API_ID + '&_app_key=' + API_KEY + '&maxResult=20';
+    $.getJSON(requestURL, function (recipe) {
+      // add recipe name to table
+      $(`#recipe-row-${recipe.id}`).prepend(
+        `<td>${recipe.name}</td>`
       );
-
-      // show ingredient in table
-      var ingredients = recipe.ingredients;
-      for (var i in ingredients) {
+      // add ingredients to table
+      recipe.ingredientLines.forEach(function (ingredient) {
         $('#ingredient-list-table tbody').append(
-          '<tr>' +
-            '<td><input type="checkbox"></td>' +
-            '<td>' + ingredients[i].quantity + '</td>' +
-            '<td>' + ingredients[i].name + '</td>' +
-          '</tr>'
+          `<tr>
+            <td><input type="checkbox"></td>
+            <td>${ingredient}</td>
+          </tr>`
         );
-      }
-    }
-  });
+      });
+    });
+  }
 }
 
 // remove recipe when pressing 'x' button
 $(document).on('click', '.remove-recipe', function (event) {
-  var localRecipeList = JSON.parse(localStorage.getItem('my_recipe_list'));
-  var id = $(this).attr('recipe_id');
-  delete localRecipeList[id];
-  localStorage.setItem('my_recipe_list', JSON.stringify(localRecipeList));
+  var recipeList = JSON.parse(localStorage.getItem('localRecipeList'));
+  var id = $(this).attr('recipe-id');
+  delete recipeList[id];
+  localStorage.setItem('localRecipeList', JSON.stringify(recipeList));
   loadTables();
 });

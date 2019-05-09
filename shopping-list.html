@@ -28,6 +28,9 @@
           <a class="nav-link" href="#">Shopping list</a>
         </li>
         <li class="nav-item mx-1">
+          <a class="nav-link" href="meal-plan.html">Meal plan</a>
+        </li>
+        <li class="nav-item mx-1">
           <a class="nav-link" href="about.html">About</a>
         </li>
       </ul>
@@ -38,6 +41,7 @@
   <div class="jumbotron text-center">
     <div class="container">
       <h1 class="jumbotron-heading">Shopping List</h1>
+      <h5 id="empty-cart-message" class="mt-2">Your cart is empty<br>Go <a href="index.html">here</a> to add recipes</h5>
 
     </div>
   </div>
@@ -47,26 +51,23 @@
   <!-- search recipes -->
   <div class="container">
     <div id="table-container" class="table-responsive-xl">
-
       <!-- recipe list -->
       <h2 class="text-center my-3">Recipes</h2>
       <table id="recipe-list-table" class="table table-sm table-bordered table-hover">
         <thead>
           <th scope="col">Recipe</th>
-          <th scope="col">Quantity</th>
+          <th scope="col">Servings</th>
           <th scope="col"></th>
         </thead>
         <tbody>
           <!-- recipes and quantities are added from shopping-list.js -->
         </tbody>
       </table>
-
       <!-- ingredient list -->
       <h2 class="text-center my-4">Ingredients</h2>
       <table id="ingredient-list-table" class="table table-sm table-bordered table-hover">
         <thead>
           <th scope="col"></th>
-          <th scope="col">Quantity</th>
           <th scope="col">Ingredient</th>
         </thead>
         <tbody>
