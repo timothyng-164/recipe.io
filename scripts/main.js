@@ -28,6 +28,10 @@ function searchRecipe (query, searchParam) {
     requestURL = baseRequest + query;
   }
 
+  if ($('option:selected').val() !== 'NONE') {
+    requestURL = requestURL + '&allowedCuisine[]=' + $('option:selected').val();
+  }
+
   $('#recipe-card-container').empty(); // clear recipes on page
   // show all recipes that match query
   $.getJSON(requestURL, function (search) {
@@ -36,7 +40,7 @@ function searchRecipe (query, searchParam) {
     var recipes = search.matches;
 
     // show/hide message if search is empty
-    if (recipes.length == 0) {
+    if (recipes.length === 0) {
       $('#emptySearchMethod').show();
     } else {
       $('#emptySearchMethod').hide();
