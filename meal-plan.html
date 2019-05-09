@@ -28,7 +28,7 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item mx-1">
-            <a class="nav-link" href="#">Shopping list</a>
+            <a class="nav-link" href="shopping-list.html">Shopping list</a>
           </li>
           <li class="nav-item mx-1">
             <a class="nav-link" href="meal-plan.html">Meal plan</a>
@@ -47,7 +47,33 @@
         </div>
       </div>
     </header>
-    <div class="container-fluid my-3">
+
+    <main>
+    <!-- table of meal plan -->
+    <div id="table-container" class="container">
+      <div class="table-responsive-xl">
+        <!-- recipe list -->
+
+        <h2 class="text-center my-3">Meal Plan</h2>
+        <table id="recipe-list-table" class="table table-sm table-bordered table-hover">
+          <thead>
+            <th scope="col">Recipe</th>
+            <th scope="col"></th>
+          </thead>
+          <tbody id="table-rows">
+            <!-- recipes and quantities are added from shopping-list.js -->
+          </tbody>
+        </table>
+      </div>
+
+      <div class="container-fluid my-4 text-center">
+        <button id="add-all-button" type="button" class="btn btn-primary">Add All</button>
+        <button id="new-plan-button" type="button" class="btn btn-secondary">New Plan</button>
+      </div>
+    </div>
+
+    <!-- meal plan forms -->
+    <div id="plan-form-container"class="container-fluid my-3">
       <div class="row justify-content-center">
         <form id="meal-plan-form" class="border rounded p-3">
           <div class="form-group">
@@ -93,11 +119,6 @@
             </select>
             <small class="form-text text-muted">You can select multiple cuisines.</small>
           </div>
-          
-          <div class="form-group">
-            <label for="calories">Calories</label>
-            <input type="number" class="form-control" placeholder="Enter calories">
-          </div>
 
           <div class="container-fluid my-4 text-center">
             <button id="submit-plan" type="submit" class="btn btn-primary">Submit</button>
@@ -105,6 +126,18 @@
         </form>
       </div>
     </div>
+    </main>
+
+  <nav id="bottom-nav" class="navbar border bg-light">
+    <div class="container-fluid">
+      <a class="home-icon mr-2" href="https://github.com/timothyng-164/recipe.io">
+        <img src="images/github-icon.png" width="25" height="25">
+      </a>
+      <p class="float-right my-auto">
+        <a href="#">Back to top</a>
+      </p>
+    </div>
+  </nav>
 
   <script src="scripts/jquery-3.3.1.min.js"></script>
   <script src="scripts/meal-plan.js"></script>
