@@ -47,6 +47,7 @@ function searchRecipe (query, searchParam) {
   });
 }
 
+
 // Show main recipe card with image and name
 function showRecipeCard (recipe) {
   var recipeCard =
