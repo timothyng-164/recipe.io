@@ -1,5 +1,7 @@
 const API_ID = '26a5fadf';
 const API_KEY = '627df20ed4f67c17b87c832eba1c3f37';
+let currentRecipe = null;
+let currentIngredientValue = null;
 
 // Load the JSON recipes file
 $(document).ready(function () {
@@ -33,20 +35,14 @@ function searchRecipe (query, searchParam) {
   }
 
   $('#recipe-card-container').empty(); // clear recipes on page
-
   // show all recipes that match query
   $.getJSON(requestURL, function (search) {
     $('#search-attribution').empty();
     $('#search-attribution').append(search.attribution.html);
     var recipes = search.matches;
-
-    // show/hide message if search is empty
-    if (recipes.length === 0) {
-      $('#emptySearchMethod').show();
-    } else {
-      $('#emptySearchMethod').hide();
+    if (recipes.length == 0) {
+      $('#jumbotron').append(`<h5>Search results empty</h5>`);
     }
-
     for (var i = 0; i < recipes.length; i++) {
       showRecipeCard(recipes[i]);
     }
@@ -55,9 +51,10 @@ function searchRecipe (query, searchParam) {
 
 // Show main recipe card with image and name
 function showRecipeCard (recipe) {
+
   var recipeCard =
-  `<div class="card m-3 overflow-hidden" data-toggle="modal" recipe-id=${recipe.id} data-target="#recipe-modal-${recipe.id}" style="width: 21rem; height: 21rem;">
-      <img src="" class="card-img-top" id="img-${recipe.id}">
+  `<div class="card m-3 overflow-hidden" data-toggle="modal" recipe-id=${recipe.id} data-target="#recipe-modal-${recipe.id}" style="width: 21rem; height: 21rem;" onclick="setCurrentRecipe(event)">
+      <img src="" class="card-img-top" id="img-${recipe.id}" style="pointer-events:none">
       <div class="card-body py-1">
         <div id="card-tags-${recipe.id}" class="row my-2 justify-content-center d-flex flex-nowrap overflow-hidden"></div>
         <div class="row justify-content-center my-1 px-5">
@@ -71,9 +68,12 @@ function showRecipeCard (recipe) {
   // fetch recipe page and display modal
   var requestURL = 'http://api.yummly.com/v1/api/recipe/' + recipe.id + '?_app_id=' + API_ID + '&_app_key=' + API_KEY + '&maxResult=20';
   $.getJSON(requestURL, function (recipePage) {
-    // console.log(recipePage);
     showRecipeModal(recipePage);
   });
+}
+
+function setCurrentRecipe(event){
+  currentRecipe = event.target.getAttribute("recipe-id");
 }
 
 // Add pop-up page for recipe card
@@ -81,7 +81,6 @@ function showRecipeModal (recipe) {
   // get largest image url
   var keys = Object.keys(recipe.images[0]);
   var image = recipe.images[0][keys[keys.length - 2]];
-
   // This will be all the info pertaining to each recipe.  It is hidden until a recipe is clicked on.  see html class "data-toggle" "data-target" for how to handle on click
   var recipeModal =
     `<div class="modal fade" id="recipe-modal-${recipe.id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -98,13 +97,12 @@ function showRecipeModal (recipe) {
         </div>
         <hr>
         <h5 id=calories-${recipe.id}></h5>
-        <h5>Servings: ${recipe.numberOfServings}</h5>
+        <div class="container-fluid row">
+        <h5 class="my-auto mr-2">Number of servings</h5>
+        <input id="servings-form-${recipe.id}" type="number" class="form-control col-2" value="${recipe.numberOfServings}" onchange="changeIngredients(event)" preValue=${recipe.numberOfServings}>
+      </div>
         <h5>Ingredients</h5>
         <ul id="modal-ingredients-${recipe.id}"></ul>
-        <div class="container-fluid row">
-          <h6 class="my-auto mr-2">Number of servings</h6>
-          <input id="servings-form-${recipe.id}" type="number" class="form-control col-2" value="${recipe.numberOfServings}">
-        </div>
       </div>
         <div class="modal-footer">
           <p class="my-auto mx-3" style="display: none;">Recipe Added!</p>
@@ -117,9 +115,16 @@ function showRecipeModal (recipe) {
   $('#search-recipe-container').append(recipeModal);
 
   recipe.ingredientLines.forEach(function (ingredient) {
-    $('#modal-ingredients-' + recipe.id).append('<li>' + ingredient + '<br></li>');
-  });
+    var intIngredient = parseFloat(ingredient);
 
+    if(isNaN(intIngredient))
+    {
+        intIngredient = 1;
+    }
+
+    $('#modal-ingredients-' + recipe.id).append('<li class="ingredent-js">' + '<span class="ingredent-number-js">'+ String(intIngredient) + '</span>' + '            ' + ingredient.slice(2) + '<br></li>');
+    //$('#modal-ingredients-' + recipe.id).append('<li class="ingredent-js">' + '<span class="ingredent-number-js">'+ String(intIngredient) + '</span>' + '            ' + ingredient + '<br></li>');
+  });
   // set large image for recipe card
   $('#img-' + recipe.id).attr('src', image);
 
@@ -153,6 +158,26 @@ $(document).on('click', '.save-recipe-button', function (event) {
   $(this).prev().fadeOut();
 });
 
+//Changing the ingredient amount needed
+function changeIngredients(event)
+{
+  const number = event.target.value;
+  const preValue = event.target.getAttribute("preValue");
+  const ingredentList = document.getElementById('modal-ingredients-' + currentRecipe);
+  const ingredents = ingredentList.getElementsByClassName('ingredent-js');
+
+  if(ingredents)
+  {
+    for(let i=0; i<ingredents.length; i++)
+    {
+      const text = ingredents[i].innerText;
+      const numberSpan = ingredents[i].getElementsByTagName('span');
+      const newNumber = Number(numberSpan[0].innerText) * Number(number) / Number(preValue);
+      numberSpan[0].innerText = Math.round(newNumber*100)/100;
+    }
+  }
+}
+
 // save recipe to local storage
 // recipes are saved as a js object {recipeID: numServings, ....}
 function saveRecipe (recipeID) {
@@ -163,7 +188,6 @@ function saveRecipe (recipeID) {
   } else {
     recipeList = {};
   }
-
   // add recipe to list with number of servings
   var servings = Number($('#servings-form-' + recipeID).val());
   if (!recipeList[recipeID]) {
