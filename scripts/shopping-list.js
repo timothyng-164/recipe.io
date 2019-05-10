@@ -41,7 +41,6 @@ function loadTables () {
       recipe.ingredientLines.forEach(function (ingredient) {
         $('#ingredient-list-table tbody').append(
           `<tr>
-            <td><input type="checkbox"></td>
             <td>${ingredient}</td>
           </tr>`
         );
@@ -56,5 +55,10 @@ $(document).on('click', '.remove-recipe', function (event) {
   var id = $(this).attr('recipe-id');
   delete recipeList[id];
   localStorage.setItem('localRecipeList', JSON.stringify(recipeList));
+  loadTables();
+});
+
+$(document).on('click', '#clear-all-button', function (event) {
+  localStorage.removeItem('localRecipeList');
   loadTables();
 });
