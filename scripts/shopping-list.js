@@ -9,7 +9,7 @@ $(document).ready(function () {
 // populate recipe and ingredient tables
 function loadTables () {
   // check if localStorage is intialized or empty
-  if (localStorage.length == 0 || localStorage.localRecipeList== '{}') {
+  if (localStorage.localRecipeList.length == 0 || localStorage.localRecipeList== '{}') {
     $('#table-container').hide();
     $('#empty-cart-message').show();
     return;
@@ -59,6 +59,6 @@ $(document).on('click', '.remove-recipe', function (event) {
 });
 
 $(document).on('click', '#clear-all-button', function (event) {
-  localStorage.removeItem('localRecipeList');
+  localStorage.setItem('localRecipeList', '{}');
   loadTables();
 });
