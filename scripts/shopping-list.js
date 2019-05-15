@@ -39,14 +39,20 @@ function loadTables () {
       // add ingredients to table
       recipe.ingredientLines.forEach(function (ingredient) {
         $('#ingredient-list-table tbody').append(
-          `<tr>
-            <td>${ingredient}</td>
+          `<tr id="box">
+            <td id="text">${ingredient}</td>
+            <td><button class="remove">x</button></td>
           </tr>`
         );
       });
     });
   }
 }
+
+// remove ingredient when clicking 'x' button
+$(document).on('click', '.remove', function (){
+  $(this).parents('tr').remove();
+});
 
 // remove recipe when pressing 'x' button
 $(document).on('click', '.remove-recipe', function (event) {
