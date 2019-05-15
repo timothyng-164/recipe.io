@@ -50,7 +50,7 @@ function loadTables () {
 }
 
 // remove ingredient when clicking 'x' button
-$(document).on('click', '.remove', function (){
+$(document).on('click', '.remove', function () {
   $(this).parents('tr').remove();
 });
 
