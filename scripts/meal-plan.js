@@ -1,11 +1,9 @@
 const API_ID = '26a5fadf';
 const API_KEY = '627df20ed4f67c17b87c832eba1c3f37';
 
-
 $(document).ready(function () {
   $('#table-container').hide();
 });
-
 
 $('#submit-plan').click(function (event) {
   event.preventDefault();
@@ -48,7 +46,7 @@ $('#submit-plan').click(function (event) {
           <td>${search.matches[i].recipeName}</td>
           <td><button class="add-recipe-button" recipe-id="${search.matches[i].id}">Add</button></td>
         <tr>`
-      )
+      );
     }
     console.log(search.matches);
   });
@@ -57,7 +55,7 @@ $('#submit-plan').click(function (event) {
   $('#table-container').show();
 });
 
-$(document).on('click', '#new-plan-button', function(event) {
+$(document).on('click', '#new-plan-button', function (event) {
   $('#plan-form-container').show();
   $('#table-container').hide();
 });
@@ -68,16 +66,14 @@ $(document).on('click', '.add-recipe-button', function (event) {
   saveRecipe(recipeID);
 });
 
-
 // save all recipes to shopping list when clicking save-all button
 $(document).on('click', '#add-all-button', function (event) {
-  $('.add-recipe-button').each(function() {
+  $('.add-recipe-button').each(function () {
     var recipeID = $(this).attr('recipe-id');
 
     saveRecipe(recipeID);
   });
 });
-
 
 // save recipe to local storage
 function saveRecipe (recipeID) {
@@ -88,7 +84,7 @@ function saveRecipe (recipeID) {
   } else {
     recipeList = {};
   }
-    console.log(recipeList);
+  console.log(recipeList);
   // add recipe to list with number of servings
 
   $.ajaxSetup({

@@ -1,7 +1,5 @@
 const API_ID = '26a5fadf';
 const API_KEY = '627df20ed4f67c17b87c832eba1c3f37';
-let currentRecipe = null;
-let currentIngredientValue = null;
 
 // Load the JSON recipes file
 $(document).ready(function () {
@@ -40,7 +38,7 @@ function searchRecipe (query, searchParam) {
     $('#search-attribution').empty();
     $('#search-attribution').append(search.attribution.html);
     var recipes = search.matches;
-    if (recipes.length == 0) {
+    if (recipes.length === 0) {
       $('#jumbotron').append(`<h5>Search results empty</h5>`);
     }
     for (var i = 0; i < recipes.length; i++) {
@@ -51,7 +49,6 @@ function searchRecipe (query, searchParam) {
 
 // Show main recipe card with image and name
 function showRecipeCard (recipe) {
-
   var recipeCard =
   `<div class="card m-3 overflow-hidden" data-toggle="modal" recipe-id=${recipe.id} data-target="#recipe-modal-${recipe.id}" style="width: 21rem; height: 21rem;" onclick="setCurrentRecipe(event)">
       <img src="" class="card-img-top" id="img-${recipe.id}" style="pointer-events:none">
@@ -70,10 +67,6 @@ function showRecipeCard (recipe) {
   $.getJSON(requestURL, function (recipePage) {
     showRecipeModal(recipePage);
   });
-}
-
-function setCurrentRecipe(event){
-  currentRecipe = event.target.getAttribute("recipe-id");
 }
 
 // Add pop-up page for recipe card
@@ -117,14 +110,14 @@ function showRecipeModal (recipe) {
   recipe.ingredientLines.forEach(function (ingredient) {
     var intIngredient = parseFloat(ingredient);
 
-    if(isNaN(intIngredient))
-    {
-        intIngredient = 1;
+    if (isNaN(intIngredient)) {
+      intIngredient = 1;
     }
 
-    $('#modal-ingredients-' + recipe.id).append('<li class="ingredent-js">' + '<span class="ingredent-number-js">'+ String(intIngredient) + '</span>' + '            ' + ingredient.slice(2) + '<br></li>');
-    //$('#modal-ingredients-' + recipe.id).append('<li class="ingredent-js">' + '<span class="ingredent-number-js">'+ String(intIngredient) + '</span>' + '            ' + ingredient + '<br></li>');
+    $('#modal-ingredients-' + recipe.id).append('<li class="ingredent-js">' + '<span class="ingredent-number-js">' + String(intIngredient) + '</span>' + '            ' + ingredient.slice(2) + '<br></li>');
+    // $('#modal-ingredients-' + recipe.id).append('<li class="ingredent-js">' + '<span class="ingredent-number-js">'+ String(intIngredient) + '</span>' + '            ' + ingredient + '<br></li>');
   });
+
   // set large image for recipe card
   $('#img-' + recipe.id).attr('src', image);
 
@@ -157,26 +150,6 @@ $(document).on('click', '.save-recipe-button', function (event) {
   $(this).prev().fadeIn();
   $(this).prev().fadeOut();
 });
-
-//Changing the ingredient amount needed
-function changeIngredients(event)
-{
-  const number = event.target.value;
-  const preValue = event.target.getAttribute("preValue");
-  const ingredentList = document.getElementById('modal-ingredients-' + currentRecipe);
-  const ingredents = ingredentList.getElementsByClassName('ingredent-js');
-
-  if(ingredents)
-  {
-    for(let i=0; i<ingredents.length; i++)
-    {
-      const text = ingredents[i].innerText;
-      const numberSpan = ingredents[i].getElementsByTagName('span');
-      const newNumber = Number(numberSpan[0].innerText) * Number(number) / Number(preValue);
-      numberSpan[0].innerText = Math.round(newNumber*100)/100;
-    }
-  }
-}
 
 // save recipe to local storage
 // recipes are saved as a js object {recipeID: numServings, ....}
