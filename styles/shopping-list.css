@@ -5,3 +5,9 @@
   flex-wrap: nowrap;
   justify-content: center;
 }
+input[type=checkbox] {
+  transform: scale(2);
+  -ms-transform: scale(2);
+  -webkit-transform: scale(2);
+  padding: 10px;
+}
