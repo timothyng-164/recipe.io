@@ -30,7 +30,7 @@ function loadTables () {
     );
   }
   for (var i in recipeList) {
-    var requestURL = 'http://api.yummly.com/v1/api/recipe/' + i + '?_app_id=' + API_ID + '&_app_key=' + API_KEY + '&maxResult=20';
+    var requestURL = 'https://api.yummly.com/v1/api/recipe/' + i + '?_app_id=' + API_ID + '&_app_key=' + API_KEY + '&maxResult=20';
     $.getJSON(requestURL, function (recipe) {
       // add recipe name to table
       $(`#recipe-row-${recipe.id}`).prepend(

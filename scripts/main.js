@@ -17,7 +17,7 @@ $('#search-button').click(function (event) {
 });
 
 function searchRecipe (query, searchParam) {
-  var baseRequest = 'http://api.yummly.com/v1/api/recipes?_app_id=' + API_ID + '&_app_key=' + API_KEY + '&requirePictures=true&q=';
+  var baseRequest = 'https://api.yummly.com/v1/api/recipes?_app_id=' + API_ID + '&_app_key=' + API_KEY + '&requirePictures=true&q=';
   var requestURL;
 
   // Search by recipe name
@@ -66,7 +66,7 @@ function showRecipeCard (recipe) {
   $('#recipe-card-container').append(recipeCard);
 
   // fetch recipe page and display modal
-  var requestURL = 'http://api.yummly.com/v1/api/recipe/' + recipe.id + '?_app_id=' + API_ID + '&_app_key=' + API_KEY + '&maxResult=20';
+  var requestURL = 'https://api.yummly.com/v1/api/recipe/' + recipe.id + '?_app_id=' + API_ID + '&_app_key=' + API_KEY + '&maxResult=20';
   $.getJSON(requestURL, function (recipePage) {
     showRecipeModal(recipePage);
   });

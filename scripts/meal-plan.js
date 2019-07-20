@@ -34,7 +34,7 @@ $('#submit-plan').click(function (event) {
 
   // Create the full URL
   var numMeals = 7;
-  var baseRequest = 'http://api.yummly.com/v1/api/recipes?_app_id=' + API_ID + '&_app_key=' + API_KEY + '&requirePictures=true&q=';
+  var baseRequest = 'https://api.yummly.com/v1/api/recipes?_app_id=' + API_ID + '&_app_key=' + API_KEY + '&requirePictures=true&q=';
   baseRequest = baseRequest + allowedIng + cuisines + excludedIng + '&maxResult=' + numMeals;
 
   // load meal plan table with recipes
@@ -91,7 +91,7 @@ function saveRecipe (recipeID) {
     async: false
   });
 
-  var requestURL = `http://api.yummly.com/v1/api/recipe/${recipeID}?_app_id=${API_ID}&_app_key=${API_KEY}`;
+  var requestURL = `https://api.yummly.com/v1/api/recipe/${recipeID}?_app_id=${API_ID}&_app_key=${API_KEY}`;
   $.getJSON(requestURL, function (recipePage) {
     var servings = recipePage.numberOfServings;
     if (!recipeList[recipeID]) {
